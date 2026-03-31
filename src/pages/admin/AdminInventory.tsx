@@ -146,10 +146,10 @@ const AdminInventory = () => {
     new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(price);
 
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-4 md:p-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 md:mb-8">
         <div>
-          <h1 className="text-3xl font-serif text-gradient-gold mb-2">Inventory Management</h1>
+          <h1 className="text-2xl md:text-3xl font-serif text-gradient-gold mb-2">Inventory Management</h1>
           <p className="text-muted-foreground font-sans text-sm">Manage your painting collection</p>
         </div>
         <button
@@ -159,14 +159,14 @@ const AdminInventory = () => {
             setImageFile(null);
             setShowForm(true);
           }}
-          className="flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground text-xs font-sans tracking-[0.2em] uppercase rounded-sm hover:bg-primary/80 transition-colors"
+          className="flex items-center justify-center gap-2 px-5 py-3 bg-primary text-primary-foreground text-xs font-sans tracking-[0.2em] uppercase rounded-sm hover:bg-primary/80 transition-colors w-full sm:w-auto"
         >
           <Plus className="w-4 h-4" /> Add Painting
         </button>
       </div>
 
       {/* Paintings Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {paintings.map((p) => (
           <div key={p.id} className="glass-card rounded-lg overflow-hidden">
             <div className="relative">
