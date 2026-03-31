@@ -36,7 +36,7 @@ const Contact = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {[
-              { icon: Mail, label: "Email", value: "contact@saiarts.com" },
+              { icon: Mail, label: "Email", value: "contact@saliarts.com" },
               { icon: Phone, label: "Phone", value: "+91 98765 43210" },
               { icon: MapPin, label: "Location", value: "Mumbai, India" },
             ].map((item, i) => (

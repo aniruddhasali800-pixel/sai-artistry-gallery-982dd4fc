@@ -41,7 +41,7 @@ const Footer = () => {
         </div>
         <div className="mt-12 pt-8 border-t border-border/30 text-center">
           <p className="text-xs text-muted-foreground font-sans tracking-wider">
-            © 2024 Sai Arts. All rights reserved. Every painting is an original work of art.
+            © 2024 Sali Arts. All rights reserved. Every painting is an original work of art.
           </p>
         </div>
       </div>

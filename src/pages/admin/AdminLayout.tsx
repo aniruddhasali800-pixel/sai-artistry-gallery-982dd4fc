@@ -59,7 +59,7 @@ const AdminLayout = () => {
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex w-64 border-r border-border bg-card/50 backdrop-blur-xl flex-col shrink-0">
         <div className="p-6 border-b border-border">
-          <Link to="/" className="font-serif text-xl text-gradient-gold">Sai Arts</Link>
+          <Link to="/" className="font-serif text-xl text-gradient-gold">Sali Arts</Link>
           <p className="text-xs text-muted-foreground font-sans mt-1 tracking-wider uppercase">Admin Dashboard</p>
         </div>
         <nav className="flex-1 p-4 space-y-1">

@@ -24,7 +24,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <h1 className="text-2xl font-serif font-bold text-gradient-gold tracking-wider">
-            SAI ARTS
+            SALI ARTS
           </h1>
         </Link>
 

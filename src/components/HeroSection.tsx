@@ -21,7 +21,7 @@ const HeroSection = () => {
       <motion.div style={{ y, scale }} className="absolute inset-0">
         <img
           src={heroBg}
-          alt="Sai Arts Gallery"
+          alt="Sali Arts Gallery"
           className="w-full h-full object-cover"
           width={1920}
           height={1080}
