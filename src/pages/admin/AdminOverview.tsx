@@ -51,11 +51,11 @@ const AdminOverview = () => {
   ];
 
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-serif text-gradient-gold mb-2">Dashboard Overview</h1>
-      <p className="text-muted-foreground font-sans text-sm mb-8">Welcome back, Admin</p>
+    <div className="p-4 md:p-8">
+      <h1 className="text-2xl md:text-3xl font-serif text-gradient-gold mb-2">Dashboard Overview</h1>
+      <p className="text-muted-foreground font-sans text-sm mb-6 md:mb-8">Welcome back, Admin</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
         {statCards.map((card) => (
           <div key={card.label} className="glass-card rounded-lg p-6">
             <div className="flex items-center justify-between mb-4">
