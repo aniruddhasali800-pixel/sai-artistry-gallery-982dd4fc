@@ -79,6 +79,13 @@ const PaintingCard = ({ painting, index }: PaintingCardProps) => {
               )}
             </div>
           </div>
+          <button
+            disabled={painting.sold}
+            onClick={() => alert(`Order placed for "${painting.title}"! We will contact you soon.`)}
+            className="mt-4 w-full py-3 text-xs font-sans font-semibold tracking-[0.2em] uppercase transition-all duration-500 rounded-sm disabled:opacity-40 disabled:cursor-not-allowed bg-primary text-primary-foreground hover:bg-primary/80"
+          >
+            {painting.sold ? "Sold Out" : "Place Order"}
+          </button>
         </div>
       </div>
     </motion.div>
