@@ -49,7 +49,7 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.5 }}
           className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-gradient-gold leading-tight"
         >
-          Sai Arts
+          Sali Arts
         </motion.h1>
 
         <motion.div
