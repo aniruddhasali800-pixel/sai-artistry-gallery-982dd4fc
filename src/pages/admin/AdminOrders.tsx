@@ -102,12 +102,12 @@ const AdminOrders = () => {
   };
 
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-serif text-gradient-gold mb-2">Order Management</h1>
-      <p className="text-muted-foreground font-sans text-sm mb-8">Review and manage customer orders</p>
+    <div className="p-4 md:p-8">
+      <h1 className="text-2xl md:text-3xl font-serif text-gradient-gold mb-2">Order Management</h1>
+      <p className="text-muted-foreground font-sans text-sm mb-6 md:mb-8">Review and manage customer orders</p>
 
       {/* Filter Tabs */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-6">
         {["all", "pending", "approved", "rejected"].map((f) => (
           <button
             key={f}
