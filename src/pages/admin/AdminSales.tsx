@@ -32,12 +32,12 @@ const AdminSales = () => {
     new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(price);
 
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-serif text-gradient-gold mb-2">Sales Report</h1>
-      <p className="text-muted-foreground font-sans text-sm mb-8">Track your painting sales performance</p>
+    <div className="p-4 md:p-8">
+      <h1 className="text-2xl md:text-3xl font-serif text-gradient-gold mb-2">Sales Report</h1>
+      <p className="text-muted-foreground font-sans text-sm mb-6 md:mb-8">Track your painting sales performance</p>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-6 mb-8 md:mb-10">
         <div className="glass-card rounded-lg p-6">
           <p className="text-xs font-sans text-muted-foreground tracking-wider uppercase mb-2">Total Revenue</p>
           <p className="text-3xl font-serif text-green-400">{formatPrice(totalRevenue)}</p>
