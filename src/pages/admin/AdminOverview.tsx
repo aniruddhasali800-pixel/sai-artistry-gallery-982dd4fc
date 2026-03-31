@@ -57,12 +57,12 @@ const AdminOverview = () => {
 
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
         {statCards.map((card) => (
-          <div key={card.label} className="glass-card rounded-lg p-6">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-sans text-muted-foreground tracking-wider uppercase">{card.label}</span>
-              <card.icon className={`w-5 h-5 ${card.color}`} />
+          <div key={card.label} className="glass-card rounded-lg p-4 md:p-6">
+            <div className="flex items-center justify-between mb-3 md:mb-4">
+              <span className="text-[10px] md:text-xs font-sans text-muted-foreground tracking-wider uppercase">{card.label}</span>
+              <card.icon className={`w-4 h-4 md:w-5 md:h-5 ${card.color}`} />
             </div>
-            <p className="text-3xl font-serif text-foreground">{card.value}</p>
+            <p className="text-xl md:text-3xl font-serif text-foreground">{card.value}</p>
           </div>
         ))}
       </div>

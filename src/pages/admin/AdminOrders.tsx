@@ -165,7 +165,7 @@ const AdminOrders = () => {
               </div>
 
               {/* Actions */}
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-2 md:gap-3">
                 {statusBadge(order.status)}
                 {order.status === "pending" && (
                   <>
