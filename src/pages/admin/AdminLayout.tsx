@@ -18,7 +18,7 @@ const AdminLayout = () => {
       {/* Mobile Header */}
       <header className="md:hidden flex items-center justify-between p-4 border-b border-border bg-card/50 backdrop-blur-xl">
         <div>
-          <Link to="/" className="font-serif text-lg text-gradient-gold">Sai Arts</Link>
+          <Link to="/" className="font-serif text-lg text-gradient-gold">Sali Arts</Link>
           <p className="text-[10px] text-muted-foreground font-sans tracking-wider uppercase">Admin</p>
         </div>
         <button onClick={() => setMenuOpen(!menuOpen)} className="text-foreground p-2">
