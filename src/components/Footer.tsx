@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
-            <h3 className="text-2xl font-serif text-gradient-gold mb-4">SAI ARTS</h3>
+            <h3 className="text-2xl font-serif text-gradient-gold mb-4">SALI ARTS</h3>
             <p className="text-sm text-muted-foreground font-sans leading-relaxed">
               Exclusive handcrafted paintings that transform spaces into galleries. 
               Each piece is unique, original, and crafted with passion.
