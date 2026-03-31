@@ -33,7 +33,7 @@ const Footer = () => {
               Contact
             </h4>
             <div className="flex flex-col gap-2 text-sm text-muted-foreground font-sans">
-              <p>contact@saiarts.com</p>
+              <p>contact@saliarts.com</p>
               <p>+91 98765 43210</p>
               <p>Mumbai, India</p>
             </div>
