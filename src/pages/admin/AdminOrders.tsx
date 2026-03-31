@@ -129,7 +129,7 @@ const AdminOrders = () => {
           <div className="text-center py-16 text-muted-foreground font-sans">No orders found</div>
         )}
         {filteredOrders.map((order) => (
-          <div key={order.id} className="glass-card rounded-lg p-6">
+          <div key={order.id} className="glass-card rounded-lg p-4 md:p-6">
             <div className="flex flex-col lg:flex-row gap-6">
               {/* Painting Info */}
               <div className="flex gap-4 flex-1">
