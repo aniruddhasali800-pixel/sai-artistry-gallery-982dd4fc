@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { type Painting } from "@/data/paintings";
 
 interface PaintingCardProps {
@@ -7,6 +8,7 @@ interface PaintingCardProps {
 }
 
 const PaintingCard = ({ painting, index }: PaintingCardProps) => {
+  const navigate = useNavigate();
   const formatPrice = (price: number) =>
     new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(price);
 
@@ -81,7 +83,7 @@ const PaintingCard = ({ painting, index }: PaintingCardProps) => {
           </div>
           <button
             disabled={painting.sold}
-            onClick={() => alert(`Order placed for "${painting.title}"! We will contact you soon.`)}
+            onClick={() => navigate(`/place-order/${painting.id}`)}
             className="mt-4 w-full py-3 text-xs font-sans font-semibold tracking-[0.2em] uppercase transition-all duration-500 rounded-sm disabled:opacity-40 disabled:cursor-not-allowed bg-primary text-primary-foreground hover:bg-primary/80"
           >
             {painting.sold ? "Sold Out" : "Place Order"}

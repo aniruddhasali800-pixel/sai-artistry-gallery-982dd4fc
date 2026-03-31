@@ -8,6 +8,7 @@ import Gallery from "./pages/Gallery";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import PlaceOrder from "./pages/PlaceOrder";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/place-order/:id" element={<PlaceOrder />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
