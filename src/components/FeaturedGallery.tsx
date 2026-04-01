@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import PaintingCard from "./PaintingCard";
-import { paintings } from "@/data/paintings";
+import { usePaintings } from "@/hooks/usePaintings";
 
 const FeaturedGallery = () => {
+  const { data: paintings = [], isLoading } = usePaintings();
   const featured = paintings.filter((p) => !p.sold).slice(0, 3);
 
   return (
@@ -25,11 +26,17 @@ const FeaturedGallery = () => {
           <div className="section-divider mt-6" />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featured.map((painting, i) => (
-            <PaintingCard key={painting.id} painting={painting} index={i} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="text-center text-muted-foreground py-20">Loading...</div>
+        ) : featured.length === 0 ? (
+          <div className="text-center text-muted-foreground py-20">No paintings available yet.</div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featured.map((painting, i) => (
+              <PaintingCard key={painting.id} painting={painting} index={i} />
+            ))}
+          </div>
+        )}
 
         <motion.div
           initial={{ opacity: 0 }}

@@ -3,13 +3,14 @@ import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { paintings } from "@/data/paintings";
+import { usePaintings } from "@/hooks/usePaintings";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 const PlaceOrder = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { data: paintings = [], isLoading } = usePaintings();
   const painting = paintings.find((p) => p.id === id);
 
   const [formData, setFormData] = useState({
@@ -21,6 +22,18 @@ const PlaceOrder = () => {
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="flex items-center justify-center h-[60vh]">
+          <p className="text-muted-foreground text-lg">Loading...</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!painting) {
     return (
@@ -122,7 +135,6 @@ const PlaceOrder = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {/* Painting Preview */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
@@ -148,7 +160,6 @@ const PlaceOrder = () => {
               </div>
             </motion.div>
 
-            {/* Order Form */}
             <motion.form
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}

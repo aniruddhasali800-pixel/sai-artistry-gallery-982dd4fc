@@ -3,12 +3,13 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import PaintingCard from "@/components/PaintingCard";
 import Footer from "@/components/Footer";
-import { paintings } from "@/data/paintings";
+import { usePaintings } from "@/hooks/usePaintings";
 
 const categories = ["All", "Abstract", "Landscape", "Contemporary", "Portrait", "Still Life"];
 
 const Gallery = () => {
   const [active, setActive] = useState("All");
+  const { data: paintings = [], isLoading } = usePaintings();
 
   const filtered = active === "All" ? paintings : paintings.filter((p) => p.category === active);
 
@@ -54,11 +55,17 @@ const Gallery = () => {
             ))}
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map((painting, i) => (
-              <PaintingCard key={painting.id} painting={painting} index={i} />
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="text-center text-muted-foreground py-20">Loading paintings...</div>
+          ) : filtered.length === 0 ? (
+            <div className="text-center text-muted-foreground py-20">No paintings found.</div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filtered.map((painting, i) => (
+                <PaintingCard key={painting.id} painting={painting} index={i} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <Footer />

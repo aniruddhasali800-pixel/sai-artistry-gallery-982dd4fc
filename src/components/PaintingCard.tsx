@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { type Painting } from "@/data/paintings";
+import { type Painting } from "@/hooks/usePaintings";
 
 interface PaintingCardProps {
   painting: Painting;
@@ -28,10 +28,8 @@ const PaintingCard = ({ painting, index }: PaintingCardProps) => {
             loading="lazy"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-          {/* Sold Badge */}
           {painting.sold && (
             <div className="absolute top-4 right-4 bg-destructive/90 backdrop-blur-sm px-3 py-1 rounded-sm">
               <span className="text-xs font-sans font-semibold tracking-widest uppercase text-destructive-foreground">
@@ -40,7 +38,6 @@ const PaintingCard = ({ painting, index }: PaintingCardProps) => {
             </div>
           )}
 
-          {/* Discount Badge */}
           {painting.originalPrice && !painting.sold && (
             <div className="absolute top-4 left-4 bg-primary/90 backdrop-blur-sm px-3 py-1 rounded-sm">
               <span className="text-xs font-sans font-semibold tracking-widest uppercase text-primary-foreground">
@@ -49,7 +46,6 @@ const PaintingCard = ({ painting, index }: PaintingCardProps) => {
             </div>
           )}
 
-          {/* Hover Details */}
           <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
             <p className="text-sm text-foreground/80 font-sans leading-relaxed">
               {painting.description}
