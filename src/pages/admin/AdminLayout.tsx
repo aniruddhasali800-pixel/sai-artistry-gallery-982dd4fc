@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { LayoutDashboard, ShoppingCart, Package, BarChart3, Menu, X } from "lucide-react";
+import { LayoutDashboard, ShoppingCart, Package, BarChart3, Menu, X, Rocket } from "lucide-react";
 
 const navItems = [
   { label: "Overview", path: "/admin", icon: LayoutDashboard },
   { label: "Orders", path: "/admin/orders", icon: ShoppingCart },
   { label: "Inventory", path: "/admin/inventory", icon: Package },
+  { label: "Upcoming", path: "/admin/upcoming", icon: Rocket },
   { label: "Sales Report", path: "/admin/sales", icon: BarChart3 },
 ];
 

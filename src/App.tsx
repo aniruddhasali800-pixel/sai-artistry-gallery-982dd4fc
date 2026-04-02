@@ -15,6 +15,7 @@ import AdminOverview from "./pages/admin/AdminOverview";
 import AdminOrders from "./pages/admin/AdminOrders";
 import AdminInventory from "./pages/admin/AdminInventory";
 import AdminSales from "./pages/admin/AdminSales";
+import AdminUpcoming from "./pages/admin/AdminUpcoming";
 
 const queryClient = new QueryClient();
 
