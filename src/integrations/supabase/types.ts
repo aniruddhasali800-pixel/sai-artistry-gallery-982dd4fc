@@ -113,6 +113,41 @@ export type Database = {
         }
         Relationships: []
       }
+      upcoming_project_media: {
+        Row: {
+          created_at: string
+          id: string
+          media_type: string
+          media_url: string
+          project_id: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          media_type?: string
+          media_url: string
+          project_id: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          media_type?: string
+          media_url?: string
+          project_id?: string
+          sort_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "upcoming_project_media_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "upcoming_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       upcoming_projects: {
         Row: {
           active: boolean
