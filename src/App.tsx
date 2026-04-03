@@ -10,6 +10,8 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import PlaceOrder from "./pages/PlaceOrder";
 import Upcoming from "./pages/Upcoming";
+import UpcomingDetail from "./pages/UpcomingDetail";
+import Sold from "./pages/Sold";
 import AdminLayout from "./pages/admin/AdminLayout";
 import AdminOverview from "./pages/admin/AdminOverview";
 import AdminOrders from "./pages/admin/AdminOrders";
