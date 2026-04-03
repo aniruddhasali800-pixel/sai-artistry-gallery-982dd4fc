@@ -10,6 +10,8 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import PlaceOrder from "./pages/PlaceOrder";
 import Upcoming from "./pages/Upcoming";
+import UpcomingDetail from "./pages/UpcomingDetail";
+import Sold from "./pages/Sold";
 import AdminLayout from "./pages/admin/AdminLayout";
 import AdminOverview from "./pages/admin/AdminOverview";
 import AdminOrders from "./pages/admin/AdminOrders";
@@ -31,6 +33,8 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/upcoming" element={<Upcoming />} />
+          <Route path="/upcoming/:id" element={<UpcomingDetail />} />
+          <Route path="/sold" element={<Sold />} />
           <Route path="/place-order/:id" element={<PlaceOrder />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminOverview />} />

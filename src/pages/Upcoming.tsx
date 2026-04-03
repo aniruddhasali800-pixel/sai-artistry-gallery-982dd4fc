@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { Play, Eye, Palette, Clock, ExternalLink } from "lucide-react";
+import { Play, Eye, Palette, Clock, ExternalLink, Images } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -33,6 +34,7 @@ const getYoutubeEmbedUrl = (url: string) => {
 const Upcoming = () => {
   const [projects, setProjects] = useState<UpcomingProject[]>([]);
   const [loading, setLoading] = useState(true);
+  const [mediaCounts, setMediaCounts] = useState<Record<string, number>>({});
 
   useEffect(() => {
     supabase
@@ -40,9 +42,24 @@ const Upcoming = () => {
       .select("id, title, description, status, video_url, thumbnail_url")
       .eq("active", true)
       .order("created_at", { ascending: false })
-      .then(({ data }) => {
-        setProjects(data ?? []);
+      .then(async ({ data }) => {
+        const projects = data ?? [];
+        setProjects(projects);
         setLoading(false);
+
+        // Fetch media counts
+        if (projects.length > 0) {
+          const ids = projects.map((p) => p.id);
+          const { data: mediaData } = await supabase
+            .from("upcoming_project_media")
+            .select("project_id")
+            .in("project_id", ids);
+          const counts: Record<string, number> = {};
+          mediaData?.forEach((m: any) => {
+            counts[m.project_id] = (counts[m.project_id] || 0) + 1;
+          });
+          setMediaCounts(counts);
+        }
       });
   }, []);
 
@@ -78,6 +95,7 @@ const Upcoming = () => {
               {projects.map((item, index) => {
                 const Icon = statusIcon[item.status] || Clock;
                 const embedUrl = item.video_url ? getYoutubeEmbedUrl(item.video_url) : null;
+                const count = mediaCounts[item.id] || 0;
 
                 return (
                   <motion.div
@@ -123,16 +141,26 @@ const Upcoming = () => {
                             <p className="text-muted-foreground leading-relaxed">
                               {item.description}
                             </p>
-                            {item.video_url && !embedUrl && (
-                              <a
-                                href={item.video_url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-primary text-sm mt-3 hover:underline"
+
+                            <div className="flex items-center gap-4 mt-4">
+                              <Link
+                                to={`/upcoming/${item.id}`}
+                                className="inline-flex items-center gap-1.5 text-primary text-sm font-sans hover:underline"
                               >
-                                Watch Video <ExternalLink className="w-3 h-3" />
-                              </a>
-                            )}
+                                <Images className="w-3.5 h-3.5" />
+                                View All Media {count > 0 && `(${count})`}
+                              </Link>
+                              {item.video_url && !embedUrl && (
+                                <a
+                                  href={item.video_url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 text-primary text-sm hover:underline"
+                                >
+                                  Watch Video <ExternalLink className="w-3 h-3" />
+                                </a>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </CardContent>
