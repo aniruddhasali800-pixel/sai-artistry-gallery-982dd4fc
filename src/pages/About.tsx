@@ -53,7 +53,7 @@ const About = () => {
                 >
                   <div className="relative overflow-hidden rounded-lg">
                     {artistPhoto ? (
-                      <img src={artistPhoto} alt={artistName} className="w-full object-cover" />
+                      <img src={artistPhoto} alt={artistName} className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-auto object-cover object-top" />
                     ) : (
                       <div className="w-full aspect-[3/4] bg-muted flex items-center justify-center text-muted-foreground">
                         No photo uploaded
