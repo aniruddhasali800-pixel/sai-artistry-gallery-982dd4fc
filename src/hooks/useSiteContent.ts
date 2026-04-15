@@ -49,9 +49,9 @@ export const useUpdateSiteContent = () => {
         .maybeSingle();
 
       if (existing) {
-        const update: Record<string, string | null> = { value };
-        if (image_url !== undefined) update.image_url = image_url;
-        const { error } = await supabase.from("site_content").update(update).eq("id", existing.id);
+        const updateData: { value: string; image_url?: string | null } = { value };
+        if (image_url !== undefined) updateData.image_url = image_url;
+        const { error } = await supabase.from("site_content").update(updateData).eq("id", existing.id);
         if (error) throw error;
       } else {
         const { error } = await supabase.from("site_content").insert({ section, key, value, image_url: image_url ?? null });
