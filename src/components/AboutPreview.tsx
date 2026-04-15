@@ -25,7 +25,7 @@ const AboutPreview = () => {
                 src={artistPhoto}
                 alt={artistName}
                 loading="lazy"
-                className="w-full h-[500px] object-cover"
+                className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
             </div>
