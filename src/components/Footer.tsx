@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { useContentMap } from "@/hooks/useSiteContent";
 
 const Footer = () => {
+  const { content: contact } = useContentMap("contact");
+  const { content: footer } = useContentMap("footer");
+
   return (
     <footer className="border-t border-border/30 py-16 px-6">
       <div className="container mx-auto">
@@ -8,14 +12,11 @@ const Footer = () => {
           <div>
             <h3 className="text-2xl font-serif text-gradient-gold mb-4">SALI ARTS</h3>
             <p className="text-sm text-muted-foreground font-sans leading-relaxed">
-              Exclusive handcrafted paintings that transform spaces into galleries. 
-              Each piece is unique, original, and crafted with passion.
+              {footer.description?.value || "Exclusive handcrafted paintings that transform spaces into galleries. Each piece is unique, original, and crafted with passion."}
             </p>
           </div>
           <div>
-            <h4 className="text-sm font-sans tracking-widest uppercase text-foreground mb-4">
-              Navigation
-            </h4>
+            <h4 className="text-sm font-sans tracking-widest uppercase text-foreground mb-4">Navigation</h4>
             <div className="flex flex-col gap-2">
               {["Home", "Gallery", "About", "Contact"].map((item) => (
                 <Link
@@ -29,13 +30,11 @@ const Footer = () => {
             </div>
           </div>
           <div>
-            <h4 className="text-sm font-sans tracking-widest uppercase text-foreground mb-4">
-              Contact
-            </h4>
+            <h4 className="text-sm font-sans tracking-widest uppercase text-foreground mb-4">Contact</h4>
             <div className="flex flex-col gap-2 text-sm text-muted-foreground font-sans">
-              <p>contact@saliarts.com</p>
-              <p>+91 98765 43210</p>
-              <p>Mumbai, India</p>
+              <p>{contact.email?.value || "contact@saliarts.com"}</p>
+              <p>{contact.phone?.value || "+91 98765 43210"}</p>
+              <p>{contact.location?.value || "Mumbai, India"}</p>
             </div>
           </div>
         </div>
