@@ -1,8 +1,14 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import artistPortrait from "@/assets/artist-portrait.jpg";
+import { useContentMap } from "@/hooks/useSiteContent";
+import artistPortraitFallback from "@/assets/artist-portrait.jpg";
 
 const AboutPreview = () => {
+  const { content } = useContentMap("about");
+
+  const artistPhoto = content.artist_photo?.image_url || artistPortraitFallback;
+  const artistName = content.artist_name?.value || "Sai";
+
   return (
     <section className="py-24 px-6 bg-secondary/30">
       <div className="container mx-auto">
@@ -16,14 +22,13 @@ const AboutPreview = () => {
           >
             <div className="relative overflow-hidden rounded-lg">
               <img
-                src={artistPortrait}
-                alt="The Artist"
+                src={artistPhoto}
+                alt={artistName}
                 loading="lazy"
                 className="w-full h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
             </div>
-            {/* Decorative frame */}
             <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-primary/50" />
             <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-primary/50" />
           </motion.div>
@@ -38,18 +43,16 @@ const AboutPreview = () => {
               The Artist
             </p>
             <h2 className="text-4xl md:text-5xl font-serif text-gradient-gold mb-6">
-              Behind Every<br />Brushstroke
+              {content.heading?.value || "Behind Every\nBrushstroke"}
             </h2>
             <div className="section-divider !mx-0 mb-8" />
             <p className="text-muted-foreground font-sans leading-relaxed mb-4">
-              With over two decades of artistic journey, Sai has mastered the delicate balance 
-              between classical techniques and contemporary expression. Each painting is a 
-              labor of love, taking weeks to months to complete.
+              {content.paragraph_1?.value ||
+                "With over two decades of artistic journey, Sai has mastered the delicate balance between classical techniques and contemporary expression. Each painting is a labor of love, taking weeks to months to complete."}
             </p>
             <p className="text-muted-foreground font-sans leading-relaxed mb-8">
-              Trained in the finest art academies and inspired by the beauty of Indian 
-              landscapes, mythology, and human emotion, every piece carries a story 
-              waiting to be discovered by its new owner.
+              {content.paragraph_2?.value ||
+                "Trained in the finest art academies and inspired by the beauty of Indian landscapes, mythology, and human emotion, every piece carries a story waiting to be discovered by its new owner."}
             </p>
             <Link
               to="/about"
