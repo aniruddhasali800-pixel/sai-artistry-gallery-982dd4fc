@@ -16,6 +16,12 @@ const Loader = () => (
 
 type ARSupport = "checking" | "supported" | "unsupported";
 
+interface XRSessionLike {
+  updateRenderState: (s: { baseLayer: unknown }) => void;
+  addEventListener: (e: string, cb: () => void) => void;
+  end?: () => Promise<void>;
+}
+
 const ThreeDDetail = () => {
   const { id } = useParams<{ id: string }>();
   const { data: paintings = [] } = usePaintings();
@@ -25,11 +31,10 @@ const ThreeDDetail = () => {
 
   useEffect(() => {
     const check = async () => {
-      // @ts-expect-error - WebXR types not standard
-      if (typeof navigator !== "undefined" && navigator.xr?.isSessionSupported) {
+      const xr = (navigator as unknown as { xr?: { isSessionSupported?: (m: string) => Promise<boolean> } }).xr;
+      if (xr?.isSessionSupported) {
         try {
-          // @ts-expect-error
-          const ok = await navigator.xr.isSessionSupported("immersive-ar");
+          const ok = await xr.isSessionSupported("immersive-ar");
           setArSupport(ok ? "supported" : "unsupported");
         } catch {
           setArSupport("unsupported");
@@ -44,30 +49,25 @@ const ThreeDDetail = () => {
   const launchAR = async () => {
     if (!painting) return;
     try {
-      // @ts-expect-error
-      const session = await navigator.xr.requestSession("immersive-ar", {
+      const xr = (navigator as unknown as { xr: { requestSession: (m: string, o: unknown) => Promise<XRSessionLike> } }).xr;
+      const session = await xr.requestSession("immersive-ar", {
         requiredFeatures: ["hit-test", "local-floor"],
       });
       setArActive(true);
       toast.success("Scan a wall, then tap to place the painting");
 
-      // Minimal AR session: setup WebGL canvas
       const canvas = document.createElement("canvas");
-      const gl = canvas.getContext("webgl", { xrCompatible: true } as never);
+      const gl = canvas.getContext("webgl", { xrCompatible: true } as WebGLContextAttributes);
       if (!gl) throw new Error("WebGL unavailable");
-      // @ts-expect-error
-      await gl.makeXRCompatible?.();
-      // @ts-expect-error
-      session.updateRenderState({ baseLayer: new XRWebGLLayer(session, gl) });
+      const glx = gl as WebGLRenderingContext & { makeXRCompatible?: () => Promise<void> };
+      await glx.makeXRCompatible?.();
+      const XRWebGLLayerCtor = (window as unknown as { XRWebGLLayer: new (s: XRSessionLike, g: WebGLRenderingContext) => unknown }).XRWebGLLayer;
+      session.updateRenderState({ baseLayer: new XRWebGLLayerCtor(session, gl) });
 
       session.addEventListener("end", () => setArActive(false));
 
-      // Simple session: end after 60s if user doesn't end manually
-      // (Full hit-testing AR placement requires a dedicated renderer; this opens
-      // the AR session so user sees their environment with the painting overlay
-      // in supported viewers like Scene Viewer / model-viewer)
       setTimeout(() => {
-        if (session.end) session.end();
+        session.end?.();
       }, 60_000);
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : "AR failed to launch";
