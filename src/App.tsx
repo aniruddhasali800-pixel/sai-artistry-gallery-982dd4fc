@@ -22,6 +22,7 @@ import AdminInventory from "./pages/admin/AdminInventory";
 import AdminSales from "./pages/admin/AdminSales";
 import AdminUpcoming from "./pages/admin/AdminUpcoming";
 import AdminAbout from "./pages/admin/AdminAbout";
+import AdminPaintings3D from "./pages/admin/AdminPaintings3D";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="inventory" element={<AdminInventory />} />
             <Route path="upcoming" element={<AdminUpcoming />} />
             <Route path="about" element={<AdminAbout />} />
+            <Route path="3d-paintings" element={<AdminPaintings3D />} />
             <Route path="sales" element={<AdminSales />} />
           </Route>
           <Route path="*" element={<NotFound />} />

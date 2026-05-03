@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { LayoutDashboard, ShoppingCart, Package, BarChart3, Menu, X, Rocket, UserCircle } from "lucide-react";
+import { LayoutDashboard, ShoppingCart, Package, BarChart3, Menu, X, Rocket, UserCircle, Box } from "lucide-react";
 
 const navItems = [
   { label: "Overview", path: "/admin", icon: LayoutDashboard },
   { label: "Orders", path: "/admin/orders", icon: ShoppingCart },
   { label: "Inventory", path: "/admin/inventory", icon: Package },
   { label: "Upcoming", path: "/admin/upcoming", icon: Rocket },
+  { label: "3D Paintings", path: "/admin/3d-paintings", icon: Box },
   { label: "About & Contact", path: "/admin/about", icon: UserCircle },
   { label: "Sales Report", path: "/admin/sales", icon: BarChart3 },
 ];
