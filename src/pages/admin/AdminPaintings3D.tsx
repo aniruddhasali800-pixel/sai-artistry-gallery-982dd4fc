@@ -81,7 +81,7 @@ const AdminPaintings3D = () => {
       if (editingId) {
         const payload: Record<string, unknown> = { title, description };
         if (image_url) payload.image_url = image_url;
-        const { error } = await supabase.from("paintings_3d" as never).update(payload).eq("id", editingId);
+        const { error } = await supabase.from("paintings_3d" as never).update(payload as never).eq("id", editingId);
         if (error) throw error;
         toast.success("Updated");
       } else {
