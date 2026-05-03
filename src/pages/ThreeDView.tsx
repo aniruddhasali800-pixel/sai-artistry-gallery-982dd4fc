@@ -6,8 +6,19 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Painting3D from "@/components/Painting3D";
-import { usePaintings, Painting } from "@/hooks/usePaintings";
+import { usePaintings } from "@/hooks/usePaintings";
+import { usePaintings3D } from "@/hooks/usePaintings3D";
 import { Box, Eye } from "lucide-react";
+
+interface GalleryItem {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  price?: number;
+  sold?: boolean;
+  source: "inventory" | "3d";
+}
 
 const Loader = () => (
   <Html center>
@@ -17,8 +28,26 @@ const Loader = () => (
 
 const ThreeDView = () => {
   const { data: paintings = [], isLoading } = usePaintings();
-  const available = paintings.filter((p) => !p.sold);
-  const [selected, setSelected] = useState<Painting | null>(null);
+  const { data: paintings3d = [], isLoading: loading3d } = usePaintings3D();
+
+  const items: GalleryItem[] = [
+    ...paintings.map((p) => ({
+      id: p.id,
+      title: p.title,
+      description: p.description,
+      image: p.image,
+      price: p.price,
+      sold: p.sold,
+      source: "inventory" as const,
+    })),
+    ...paintings3d.map((p) => ({
+      id: p.id,
+      title: p.title,
+      description: p.description,
+      image: p.image,
+      source: "3d" as const,
+    })),
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -43,20 +72,25 @@ const ThreeDView = () => {
             </p>
           </motion.div>
 
-          {isLoading ? (
+          {isLoading || loading3d ? (
             <div className="text-center text-muted-foreground py-20">Loading...</div>
-          ) : available.length === 0 ? (
+          ) : items.length === 0 ? (
             <div className="text-center text-muted-foreground py-20">No paintings available.</div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {available.map((painting) => (
+              {items.map((painting) => (
                 <motion.div
                   key={painting.id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="glass-card border border-border/30 rounded-lg overflow-hidden"
+                  className="glass-card border border-border/30 rounded-lg overflow-hidden relative"
                 >
+                  {painting.sold && (
+                    <div className="absolute top-3 right-3 z-10 bg-destructive/90 px-3 py-1 rounded-sm">
+                      <span className="text-xs font-sans font-semibold tracking-widest uppercase text-destructive-foreground">Sold</span>
+                    </div>
+                  )}
                   <div className="h-64 bg-gradient-to-b from-background to-muted/20">
                     <Canvas camera={{ position: [0, 0, 3.2], fov: 40 }}>
                       <ambientLight intensity={0.6} />
@@ -78,9 +112,11 @@ const ThreeDView = () => {
                     <h3 className="font-serif text-xl text-gradient-gold">{painting.title}</h3>
                     <p className="text-xs text-muted-foreground line-clamp-2">{painting.description}</p>
                     <div className="flex items-center justify-between pt-2">
-                      <span className="text-primary font-sans">₹{painting.price.toLocaleString()}</span>
+                      <span className="text-primary font-sans">
+                        {painting.price ? `₹${painting.price.toLocaleString()}` : "3D Showcase"}
+                      </span>
                       <Link
-                        to={`/3d-view/${painting.id}`}
+                        to={`/3d-view/${painting.source === "3d" ? "x-" : ""}${painting.id}`}
                         className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-primary border border-primary/50 px-3 py-2 hover:bg-primary hover:text-primary-foreground transition-all"
                       >
                         <Eye className="w-3 h-3" /> View Painting
